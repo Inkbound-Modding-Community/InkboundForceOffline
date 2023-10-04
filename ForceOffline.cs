@@ -20,7 +20,7 @@ namespace ForceOffline {
         public static ConfigFile conf;
         // public static string persistentPath = Path.Combine(Paths.PluginPath, Path.Combine(PluginInfo.PLUGIN_NAME, "persistent_data"));
         public static string persistentPath = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName, "persistent_data");
-        public static Harmony HarmonyInstance => new Harmony(PluginInfo.PLUGIN_GUID);
+        public static Harmony HarmonyInstance => new Harmony(PLUGIN_GUID);
         private void Awake() {
             instance = this;
             log = Logger;
@@ -31,7 +31,7 @@ namespace ForceOffline {
                 CopyDirectory(Application.persistentDataPath + @"\save-game", persistentPath + @"\save-game", true);
             }
             HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
-            log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            log.LogInfo($"Plugin {PLUGIN_GUID} is loaded!");
         }
         public bool UnfinishedRun() {
             if (!Directory.Exists(persistentPath)) {
