@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
@@ -7,13 +7,29 @@
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+    <Configurations>Debug;Release;</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <InkboundInstallDir Condition=" '$(InkboundInstallDir)' == '' ">D:\Games\Steam\steamapps\common\Inkbound</InkboundInstallDir>
+  </PropertyGroup>
+	
+  <PropertyGroup>
+    <PostBuildEvent>echo "Copying build results to $(InkboundInstallDir)\BepInEx\plugins\$(AssemblyName)\"
+            xcopy /Y /E "$(TargetDir)*.*" "$(InkboundInstallDir)\BepInEx\plugins\$(AssemblyName)\"
+        </PostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="Assembly-CSharp">
+	  <HintPath>$(InkboundInstallDir)\Inkbound_Data\Managed\Assembly-CSharp.dll</HintPath>
+	  <Private>False</Private>
+	</Reference>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
-    <PackageReference Include="UnityEngine.Modules" Version="2021.3.29f1" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.29" IncludeAssets="compile" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
