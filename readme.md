@@ -1,3 +1,5 @@
+# This mod is obsolete as all its functionality is incorporated into InkboundModEnabler (Version >= 1.1.2)
+
 This mod was created with the intention to allow for offline play that will not result in any kind of online change.
 The hope is that this will allow adding in new content (like Vestiges).
 
